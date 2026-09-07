@@ -48,8 +48,8 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-amber-400 group">
               <img
-                src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1200&auto=format&fit=crop"
-                alt="{storeConfig.storeNameAr}"
+                src="/images/hero-banner.jpg"
+                alt={storeConfig.storeNameAr}
                 className="w-full h-72 sm:h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
