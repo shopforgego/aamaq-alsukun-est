@@ -1,12 +1,11 @@
 import React from 'react';
-import { Search, ShoppingBag, ShieldCheck, Phone, FileText } from 'lucide-react';
+import { Search, ShoppingBag, ShieldCheck, Phone } from 'lucide-react';
 import { storeConfig } from '../config/store';
 import { Logo } from './Logo';
 
 interface HeaderProps {
   cartCount: number;
   onOpenCart: () => void;
-  onOpenPolicies: (tab: 'returns' | 'shipping' | 'terms' | 'privacy') => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 }
@@ -14,7 +13,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   cartCount,
   onOpenCart,
-  onOpenPolicies,
   searchQuery,
   setSearchQuery,
 }) => {
@@ -59,14 +57,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => onOpenPolicies('returns')}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-2 text-xs font-bold opacity-80 hover:opacity-100 rounded-lg border border-current/20 transition"
-            >
-              <FileText className="w-4 h-4" />
-              الاستبدال والاسترجاع
-            </button>
-
             <button
               onClick={onOpenCart}
               className="relative flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold shadow-lg shadow-orange-600/25 px-4 py-2.5 rounded-xl transition transform active:scale-95"
