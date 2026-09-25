@@ -1,10 +1,11 @@
 import React from 'react';
-import { ShieldCheck, Phone, Mail, MapPin, FileText } from 'lucide-react';
+import { ShieldCheck, Phone, Mail, MapPin } from 'lucide-react';
 import { storeConfig } from '../config/store';
 import { Logo } from './Logo';
+import { PaymentChips } from './PaymentChips';
 
 interface FooterProps {
-  onOpenPolicies: (tab: 'returns' | 'shipping' | 'terms' | 'privacy') => void;
+  onOpenPolicies: (tab: 'cancellation' | 'returns' | 'shipping' | 'terms' | 'privacy') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenPolicies }) => {
@@ -33,22 +34,27 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicies }) => {
             <h4 className="text-white font-extrabold text-sm mb-3">روابط هامة وسياسات</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => onOpenPolicies('returns')} className="hover:text-amber-400 transition">
+                <button onClick={() => onOpenPolicies('cancellation')} className="hover:text-amber-400 transition text-right">
+                  سياسة إلغاء الطلبات
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onOpenPolicies('returns')} className="hover:text-amber-400 transition text-right">
                   سياسة الاستبدال والاسترجاع
                 </button>
               </li>
               <li>
-                <button onClick={() => onOpenPolicies('shipping')} className="hover:text-amber-400 transition">
+                <button onClick={() => onOpenPolicies('shipping')} className="hover:text-amber-400 transition text-right">
                   الشحن والضمان والتوصيل
                 </button>
               </li>
               <li>
-                <button onClick={() => onOpenPolicies('terms')} className="hover:text-amber-400 transition">
+                <button onClick={() => onOpenPolicies('terms')} className="hover:text-amber-400 transition text-right">
                   الشروط والأحكام
                 </button>
               </li>
               <li>
-                <button onClick={() => onOpenPolicies('privacy')} className="hover:text-amber-400 transition">
+                <button onClick={() => onOpenPolicies('privacy')} className="hover:text-amber-400 transition text-right">
                   سياسة الخصوصية والأمان
                 </button>
               </li>
@@ -61,11 +67,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicies }) => {
             <ul className="space-y-2.5 text-slate-300">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                <span>{storeConfig.fullAddress} (رمز: {storeConfig.shortAddress})</span>
+                <div>
+                  <p>{storeConfig.fullAddress}</p>
+                  <p className="text-[10px] text-amber-400 font-mono mt-0.5">العنوان المختصر: {storeConfig.shortAddress}</p>
+                </div>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <a href={`mailto:${storeConfig.email}`} className="hover:text-amber-400 transition">{storeConfig.email}</a>
+                <a href={`mailto:${storeConfig.email}`} className="hover:text-amber-400 transition break-all">{storeConfig.email}</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
@@ -75,9 +84,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicies }) => {
               </li>
             </ul>
           </div>
+
           {/* Col 4: Payment Badges */}
           <div>
-            <h4 className="font-extrabold text-sm mb-3">وسائل الدفع المعتمدة</h4>
+            <h4 className="font-extrabold text-sm mb-3 text-white">وسائل الدفع المعتمدة</h4>
             <div className="flex flex-wrap items-center gap-2">
               {/* 1. MADA FIRST on the right in RTL */}
               <span className="inline-flex items-center justify-center h-9 px-3 rounded-lg bg-white shadow-sm border border-slate-200" title="مدى mada">
@@ -109,26 +119,30 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicies }) => {
                 </svg>
               </span>
 
-              {/* 4. BANK TRANSFER */}
-              <span className="inline-flex items-center justify-center h-9 px-3 rounded-lg bg-white shadow-sm border border-slate-200" title="التحويل البنكي">
-                <div className="flex items-center gap-1.5 text-[#1f2a44] font-bold text-xs">
-                  <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2" aria-hidden="true">
-                    <rect x="3" y="5" width="18" height="14" rx="2" />
-                    <path d="M7 12h10" />
-                  </svg>
-                  <span>التحويل البنكي</span>
-                </div>
+              {/* 4. APPLE PAY */}
+              <span className="inline-flex items-center justify-center h-9 px-3 rounded-lg bg-white shadow-sm border border-slate-200" title="أبل باي (Apple Pay)">
+                <svg className="h-5 w-auto" viewBox="0 0 512 210.2" fill="#000000" aria-label="أبل باي Apple Pay">
+                  <path d="M93.6,27.1C87.6,34.2,78,39.8,68.4,39c-1.2-9.6,3.5-19.8,9-26.1c6-7.3,16.5-12.5,25-12.9 C103.4,10,99.5,19.8,93.6,27.1 M102.3,40.9c-13.9-0.8-25.8,7.9-32.4,7.9c-6.7,0-16.8-7.5-27.8-7.3c-14.3,0.2-27.6,8.3-34.9,21.2 c-15,25.8-3.9,64,10.6,85c7.1,10.4,15.6,21.8,26.8,21.4c10.6-0.4,14.8-6.9,27.6-6.9c12.9,0,16.6,6.9,27.8,6.7 c11.6-0.2,18.9-10.4,26-20.8c8.1-11.8,11.4-23.3,11.6-23.9c-0.2-0.2-22.4-8.7-22.6-34.3c-0.2-21.4,17.5-31.6,18.3-32.2 C123.3,42.9,107.7,41.3,102.3,40.9 M182.6,11.9v155.9h24.2v-53.3h33.5c30.6,0,52.1-21,52.1-51.4c0-30.4-21.1-51.2-51.3-51.2H182.6z M206.8,32.3h27.9c21,0,33,11.2,33,30.9c0,19.7-12,31-33.1,31h-27.8V32.3z M336.6,169c15.2,0,29.3-7.7,35.7-19.9h0.5v18.7h22.4V90.2 c0-22.5-18-37-45.7-37c-25.7,0-44.7,14.7-45.4,34.9h21.8c1.8-9.6,10.7-15.9,22.9-15.9c14.8,0,23.1,6.9,23.1,19.6v8.6l-30.2,1.8 c-28.1,1.7-43.3,13.2-43.3,33.2C298.4,155.6,314.1,169,336.6,169z M343.1,150.5c-12.9,0-21.1-6.2-21.1-15.7c0-9.8,7.9-15.5,23-16.4 l26.9-1.7v8.8C371.9,140.1,359.5,150.5,343.1,150.5z M425.1,210.2c23.6,0,34.7-9,44.4-36.3L512,54.7h-24.6l-28.5,92.1h-0.5 l-28.5-92.1h-25.3l41,113.5l-2.2,6.9c-3.7,11.7-9.7,16.2-20.4,16.2c-1.9,0-5.6-0.2-7.1-0.4v18.7C417.3,210,423.3,210.2,425.1,210.2z" />
+                </svg>
               </span>
             </div>
+            <p className="text-[10px] text-slate-500 mt-2">
+              بوابات دفع مشفرة ومعتمدة في السعودية
+            </p>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-[11px]">
+        {/* Full-width Payment Badges Banner */}
+        <div className="mt-8 pt-4 border-t border-slate-900">
+          <PaymentChips />
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-[11px]">
           <div>
             جميع الحقوق محفوظة © {new Date().getFullYear()} {storeConfig.companyNameAr}
           </div>
           <div>
-            المتجر الرسمي لقطع غيار وإكسسوارات السيارات المعتمد في المملكة العربية السعودية
+            المتجر الرسمي لأدوات ومكائن القهوة المختصة ومستلزمات الضيافة والمنزل العصري المعتمد في المملكة العربية السعودية
           </div>
         </div>
       </div>

@@ -35,9 +35,14 @@ export interface StoreConfig {
   companyNameEn: string;
   taglineAr: string;
   taglineEn: string;
+  domain?: string;
   cr: string;
   taxNumber: string;
   shortAddress: string;
+  buildingNo?: string;
+  additionalNo?: string;
+  street?: string;
+  postalCode?: string;
   city: string;
   district: string;
   fullAddress: string;

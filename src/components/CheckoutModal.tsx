@@ -22,7 +22,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
-    city: 'جازان',
+    city: storeConfig.city || 'جدة',
     district: '',
     street: '',
     notes: '',
@@ -39,7 +39,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       alert('يرجى ملء جميع الحقول الإلزامية (الاسم، الجوال، الحي)');
       return;
     }
-    const orderNumber = `WRD-${Math.floor(100000 + Math.random() * 900000)}`;
+    const orderNumber = `AMQ-${Math.floor(100000 + Math.random() * 900000)}`;
     onOrderSuccess({
       orderNumber,
       customer: formData,

@@ -7,7 +7,7 @@ import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { OrderSuccessModal } from './components/OrderSuccessModal';
-import { PoliciesModal } from './components/PoliciesModal';
+import { PoliciesModal, PolicyTab } from './components/PoliciesModal';
 import { Footer } from './components/Footer';
 import rawProducts from './data/products.json';
 import { Product, CartItem } from './types/store';
@@ -25,7 +25,7 @@ export function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isPoliciesOpen, setIsPoliciesOpen] = useState(false);
-  const [activePolicyTab, setActivePolicyTab] = useState<'returns' | 'shipping' | 'terms' | 'privacy'>('returns');
+  const [activePolicyTab, setActivePolicyTab] = useState<PolicyTab>('returns');
   const [orderData, setOrderData] = useState<any>(null);
 
   const categories = useMemo(() => {
@@ -83,7 +83,7 @@ export function App() {
     setCart((prev) => prev.filter((item) => item.product.id !== productId));
   };
 
-  const handleOpenPolicies = (tab: 'returns' | 'shipping' | 'terms' | 'privacy') => {
+  const handleOpenPolicies = (tab: PolicyTab) => {
     setActivePolicyTab(tab);
     setIsPoliciesOpen(true);
   };
